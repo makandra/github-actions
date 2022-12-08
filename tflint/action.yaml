@@ -1,0 +1,38 @@
+name: Tflint
+description: "Validate configuration of *.tf files."
+author: "Claus-Theodor Riegg"
+inputs:
+  path:
+    description: "Path on which tflint will be executed."
+    required: false
+    default: .
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v2
+      name: Checkout source code
+
+    - uses: actions/cache@v2
+      name: Cache plugin dir
+      with:
+        path: ~/.tflint.d/plugins
+        key: tflint-${{ hashFiles('.tflint.hcl') }}
+
+    - uses: terraform-linters/setup-tflint@v2
+      name: Setup TFLint
+      with:
+        tflint_version: v0.42.2
+
+    - name: Show version
+      run: tflint --version
+      shell: bash
+
+    - name: Init TFLint
+      working-directory: modules/${{ inputs.path }}
+      run: tflint --init
+      shell: bash
+
+    - name: Run TFLint
+      working-directory: modules/${{ inputs.path }}
+      run: tflint -f compact
+      shell: bash
