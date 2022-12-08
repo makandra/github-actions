@@ -1,0 +1,22 @@
+name: Checkov-terraform
+description: "Validate configuration of *.tf files."
+author: "Claus-Theodor Riegg"
+inputs:
+  path:
+    description: "Path on which checkov will be executed."
+    required: false
+    default: .
+runs:
+  using: "composite"
+  steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - name: Test with Checkov
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: ${{ inputs.path }}
+          framework: terraform
