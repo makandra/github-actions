@@ -1,0 +1,15 @@
+name: Precommit
+description: "Run any present pre-commit configuration in CI pipeline."
+author: "Claus-Theodor Riegg"
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+    - run: |
+            curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/v0.16.0/terraform-docs-v0.16.0-$(uname)-amd64.tar.gz
+            tar -xzf terraform-docs.tar.gz
+            chmod +x terraform-docs
+            sudo mv terraform-docs /usr/bin/terraform-docs
+      shell: bash
+    - uses: actions/setup-python@v3
+    - uses: pre-commit/action@v3.0.0

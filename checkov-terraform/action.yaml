@@ -1,5 +1,5 @@
 name: Checkov-terraform
-description: "Validate configuration of *.tf files."
+description: "Run checkov in terraform mode."
 author: "Claus-Theodor Riegg"
 inputs:
   path:
