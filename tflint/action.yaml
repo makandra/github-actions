@@ -25,11 +25,14 @@ runs:
 
     - name: Show version
       run: tflint --version
+      shell: bash
 
     - name: Init TFLint
       working-directory: modules/${{ inputs.path }}
       run: tflint --init
+      shell: bash
 
     - name: Run TFLint
       working-directory: modules/${{ inputs.path }}
       run: tflint -f compact
+      shell: bash
