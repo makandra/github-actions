@@ -9,7 +9,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       name: Checkout source code
 
     - uses: actions/cache@v2
@@ -18,10 +18,10 @@ runs:
         path: ~/.tflint.d/plugins
         key: tflint-${{ hashFiles('.tflint.hcl') }}
 
-    - uses: terraform-linters/setup-tflint@v2
+    - uses: terraform-linters/setup-tflint@v4
       name: Setup TFLint
       with:
-        tflint_version: v0.42.2
+        tflint_version: v0.52.0
 
     - name: Show version
       run: tflint --version
