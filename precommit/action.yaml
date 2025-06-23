@@ -12,6 +12,10 @@ runs:
             tar -xzf terraform-docs.tar.gz
             chmod +x terraform-docs
             sudo mv terraform-docs /usr/bin/terraform-docs
+            curl -sSLo ./tofu.tar.gz https://github.com/opentofu/opentofu/releases/download/v1.9.1/tofu_1.9.1_$(uname)_amd64.tar.gz
+            tar -xzf tofu.tar.gz
+            chmod +x tofu
+            sudo mv tofu /usr/bin/tofu
       shell: bash
     - uses: actions/setup-python@v3
     - uses: pre-commit/action@v3.0.0
